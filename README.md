@@ -6,7 +6,7 @@ Cloudforet 웹 콘솔에서 수동으로 xlsx export 하던 **AWS TrustedAdvisor
 REST API로 EST API로 자동 수집하고, AWS Account(Project) 단위의 HTML 보안 보고서를 자동 생성하여 S3에 일별/월별로 보관하는 Serverless 파이프라인을 구축한다.
 
 ## 전체 시스템 아키텍처
-<img src="[cloudforet-archi.png](https://github.com/lcow46/anr-fighting/blob/main/cloudforet-archi.png)", height="100x", width="100px">
+https://github.com/lcow46/anr-fighting/blob/main/cloudforet-archi.png
 
 
 ## 1. SpaceOne API 기본 구조
