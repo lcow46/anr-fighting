@@ -98,33 +98,12 @@ REST API로 EST API로 자동 수집하고, AWS Account(Project) 단위의 HTML 
 - `project_id` 기반 매핑으로 보고서 생성이 가능하므로 참고용으로, 추가 권한 요구 조회를 제외하고 처리
 
 
-## 5. 주요 구현 현황 및 자동화 산출물
+## 5. 자동화 산출물
 
-**진행 현황**
 1. Serverless 기반 무인 자동화 파이프라인 구축 완료
 2. AWS Account(Project) 단위 HTML 리포트 분할 생성
 3. S3 날짜별 디렉토리 보관 (YYYY-MM-DD/)
-
-**이후 계획**
-1. AWS Step Functions (MAP 분산 병렬 처리) 도입
+1. AWS Step Functions (MAP 분산 병렬 처리) 
 2. Amazon Bedrock (Generative AI) 연동을 통한 자연어 요약
 
-```text
-[S3 원본 저장]
-        │
-        ▼
-[AWS Step Functions (Map 병렬 처리)]
-        │
-        ▼
-[Lambda (Account별 분석)]
-        │
-        ├──────────────► [Amazon Bedrock]
-        │                    │
-        │                    ├─ 위험도 평가
-        │                    ├─ 보안 분석
-        │                    └─ 조치 가이드 생성
-        │
-        ▼
-[S3 최종 결과 저장 (HTML Report)]
-```
 
