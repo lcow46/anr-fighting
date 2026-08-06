@@ -5,19 +5,9 @@
 Cloudforet 웹 콘솔에서 수동으로 xlsx export 하던 **AWS TrustedAdvisor 보안(Security) 점검 결과**를
 REST API로 EST API로 자동 수집하고, AWS Account(Project) 단위의 HTML 보안 보고서를 자동 생성하여 S3에 일별/월별로 보관하는 Serverless 파이프라인을 구축한다.
 
-## 🏗️ 전체 시스템 아키텍처
+## 전체 시스템 아키텍처
+<img src="./cloudforet-archi.png", height="100x", width="100px">
 
-```text
-[EventBridge Scheduler] (월간 1회 Cron 실행)
-       │
-       ▼ (Trigger)
-[Lambda Function] (Memory: 512MB~1GB)
-       │ ─── (API Key Header) ───► [SpaceONE API]
-       │ ◄── (TA Security Data) ──────┘
-       │
-       ▼ (Account별 HTML 보고서 분할 저장)
-[S3 Bucket] (경로: YYYY-MM-DD/trusted_advisor_report_{AccountName}_{YYYYMMDD}.html)
-```
 
 ## 1. SpaceOne API 기본 구조
 
@@ -67,7 +57,7 @@ REST API로 EST API로 자동 수집하고, AWS Account(Project) 단위의 HTML 
 
 `CloudService` 응답에는 `project_id`, `workspace_id`만 있고 사람이 읽을 이름은 없다. Identity 서비스에서 별도 조회해서 매핑해야 한다.
 
-### 4-1. Project (82개)
+### 4-1. Project (81개)
 
 **엔드포인트**: `POST /identity/project/list`
 - 조회 방식: 수집된 TA Check 데이터의 `project_id` 목록을 추출한 후 in 연산자로 일괄 조회
@@ -96,7 +86,6 @@ REST API로 EST API로 자동 수집하고, AWS Account(Project) 단위의 HTML 
 
 - 수집된 데이터셋 내 workspace_id는 단일 객체(workspace-262a7ab4df64)로 구성
 - `project_id` 기반 매핑으로 보고서 생성이 가능하므로 참고용으로, 추가 권한 요구 조회를 제외하고 처리
-
 
 ## 5. 자동화 산출물
 
