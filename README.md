@@ -10,15 +10,12 @@ SpaceONE(Cloudforet) API를 통해 다수의 AWS 계정에 대한 Trusted Adviso
 
 1. **Trigger**: `EventBridge Scheduler`를 통해 매월 1회(또는 지정된 Cron 주기) 파이프라인이 자동 시작됩니다.
 2. **Orchestration**: `AWS Step Functions`가 전체 워크플로우를 제어합니다.
-
 2-1. **Data Fetching (1차 Lambda)**:
  * 고정된 API Key로 `SpaceONE API`를 호출하여 전체 계정의 Trusted Advisor 데이터를 수집합니다.
  * 페이로드 용량 제한(256KB)을 우회하기 위해 전체 원본 데이터는 `S3 Bucket`에 JSON 형태로 임시 저장하고, 경량화된 계정 배열만 다음 단계로 넘깁니다.
-
- 2-2. **Parallel Processing (Map State)**:
+2-2. **Parallel Processing (Map State)**:
  * 수집된 계정(Account) 수만큼 2차 Lambda를 병렬(Map)로 실행합니다.
  * Map State를 활용해 수십~수백 개의 계정을 동시에 분석합니다.
-
 2-3. **AI Analysis & Reporting (2차 Lambda)**:
  * `S3 Bucket`에서 각 계정에 해당하는 원본 데이터를 읽어옵니다.
  * 취약점(Error/Warning) 데이터를 추출하여 `Amazon Bedrock (Nova 모델)`에 전송하고, 위험도 분석 및 조치 가이드 요약을 받아옵니다.
