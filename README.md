@@ -1,12 +1,9 @@
-# TA 보안 진단 HTML 보고서 정의 및 산출 프로세스 자동화
+# TA 보안 진단 보고서 자동화를 위한 데이터 수집 구조 정의
 
 ## 목표
 
 Cloudforet 웹 콘솔에서 수동으로 xlsx export 하던 **AWS TrustedAdvisor 보안(Security) 점검 결과**를
-REST API로 EST API로 자동 수집하고, AWS Account(Project) 단위의 HTML 보안 보고서를 자동 생성하여 S3에 일별/월별로 보관하는 Serverless 파이프라인을 구축한다.
-
-## 전체 시스템 아키텍처
-https://github.com/lcow46/anr-fighting/blob/main/cloudforet-archi.png
+REST API로 EST API로 자동 수집하고, AWS Account(Project) 단위의 HTML 보안 보고서를 자동 생성하여 S3에 보관하는 Serverless 파이프라인을 구축한다.
 
 
 ## 1. SpaceOne API 기본 구조
@@ -86,13 +83,5 @@ https://github.com/lcow46/anr-fighting/blob/main/cloudforet-archi.png
 
 - 수집된 데이터셋 내 workspace_id는 단일 객체(workspace-262a7ab4df64)로 구성
 - `project_id` 기반 매핑으로 보고서 생성이 가능하므로 참고용으로, 추가 권한 요구 조회를 제외하고 처리
-
-## 5. 자동화 산출물
-
-1. Serverless 기반 무인 자동화 파이프라인 구축 완료
-2. AWS Account(Project) 단위 HTML 리포트 분할 생성
-3. S3 날짜별 디렉토리 보관 (YYYY-MM-DD/)
-1. AWS Step Functions (MAP 분산 병렬 처리) 
-2. Amazon Bedrock (Generative AI) 연동을 통한 자연어 요약
 
 
