@@ -42,12 +42,12 @@ SpaceONE(Cloudforet) API를 통해 다수의 AWS 계정에 대한 Trusted Adviso
 | `BEDROCK_MODEL_ID` | 사용할 AI 모델의 Inference Profile ID |
 
 
-## 📂 S3 Storage Structure
+## 📂 S3 Storage Structure (Output)
 
 결과물은 지정한 S3 버킷 내에 날짜별로 정리되어 저장됩니다.
 
 ```text
-s3://your-bucket-name/
+s3 bucket
  ├── raw/
  │    └── 2026-08-07/
  │         └── ta_raw_data.json (1차 람다가 수집한 전체 JSON 데이터)
